@@ -15,7 +15,7 @@ hint str _playerGroup;
 sleep 2;
 //Generate a marker within a 1.5km radius of the player.
 
-//while condition is temporary, will set to wp complete event
+// this while condition will change, will set to wp complete event
 while { true } do {
 	hint "Creating marker";
 	_randomPosAroundPlayer = [[[position player, 1500]],[]] call BIS_fnc_randomPos;
