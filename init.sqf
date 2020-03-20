@@ -1,15 +1,16 @@
 
-_scriptStart = true;
 _playerGroup = group player;
 _grp = [getMarkerPos "squadSpawn", side player, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfTeam")] call BIS_fnc_spawnGroup;
 _veh = createVehicle ["B_Heli_Light_01_F", position player, [], 0, "FLY"];
+{_x allowDamage false; } forEach units _grp;
 _cntGroup = count units _grp;
+
 player moveInDriver _veh;
 
-while { (alive player) and (_scriptStart) } do {
+while { (alive player)} do {
 	_u = units _grp;
 	_freeCargoPositions = vehicle player emptyPositions "cargo";
-	sleep 0.5;
+	sleep 5;
 
 	//If humming bird is empty, then move units into cargo not co-pilot
 	if (_freeCargoPositions == 6) then {
@@ -25,10 +26,14 @@ while { (alive player) and (_scriptStart) } do {
 			else { _selUnit moveInCargo _veh; };
 		};
 
-	//Create marker on map at Safe POS
     hint parseText "<t size='2.0' color='#6beb34'>Creating marker...</t>";// Displays text twice as large as the default one
-	_getBestPos = [player, 500, 700, 3, 0, 0.3, 0] call BIS_fnc_findSafePos;
-	_bestMarker = createMarker ["bestMarker", _getBestPos];
+	_nearestCities = nearestLocations [position player, ["NameCity"], 3500];
+	_randomCities = (_nearestCities select (floor (random (count _nearestCities))));
+
+	_position = position _randomCities;
+	_newPos = _position findEmptyPosition [0,500,"B_Heli_Light_01_F"];
+
+	_bestMarker = createMarker ["bestMarker", _newPos];
 	_bestMarker setMarkerType "hd_dot";
 
 	//Pilot way-point logic
