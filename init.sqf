@@ -11,17 +11,16 @@ while { (alive player)} do {
 	_u = units _grp;
 	_freeCargoPositions = vehicle player emptyPositions "cargo";
 	sleep 5;
-
-	//If humming bird is empty, then move units into cargo not co-pilot
+	
 	if (_freeCargoPositions == 6) then {
 		sleep 10;
 		_c = fullCrew [vehicle player, "turret", true];
 		_countTurret = count fullCrew [vehicle player, "turret", true];
-	
 		for [{_i = 0}, {_i < _cntGroup}, {_i = _i + 1}] do {
 			_selUnit = (_u select _i);
 			_selPos = ((_c select _i) select 2);
 			
+			//Check cargo index
 			if (_selPos != -1) then { _selUnit moveInCargo [_veh, _i]; }
 			else { _selUnit moveInCargo _veh; };
 		};
