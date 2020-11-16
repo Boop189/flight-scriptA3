@@ -1,4 +1,5 @@
 
+//terrible performance, is functional
 _playerGroup = group player;
 _grp = [getMarkerPos "squadSpawn", side player, (configfile >> "CfgGroups" >> "West" >> "BLU_F" >> "Infantry" >> "BUS_InfTeam")] call BIS_fnc_spawnGroup;
 _veh = createVehicle ["B_Heli_Light_01_F", position player, [], 0, "FLY"];
