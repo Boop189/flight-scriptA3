@@ -1,7 +1,7 @@
 # How to use
 1. Create a new Single player mission in the Arma 3 editor and save it.
 
-2. In the Arma 3 editor, create a marker with the variable name **squadSpawn* and place it anywhere.
+2. In the Arma 3 editor, create a marker with the variable name **squadSpawn** and place it anywhere.
 
 3. Create a player unit and place it anywhere.
 
